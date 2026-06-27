@@ -1,6 +1,6 @@
 # Автотесты для сервиса доставки карты
 
-[![Java CI with Gradle](https://github.com/alishass1/delivery-app/actions/workflows/gradle.yml/badge.svg)](https://github.com/alishass1/delivery-app/actions/workflows/gradle.yml)
+[![Java CI with Gradle](https://github.com/alishass1/delivery/actions/workflows/gradle.yml/badge.svg)](https://github.com/alishass1/delivery/actions/workflows/gradle.yml)
 
 ## Описание проекта
 Автоматизированное тестирование формы заказа доставки карты с функцией перепланирования даты встречи.
