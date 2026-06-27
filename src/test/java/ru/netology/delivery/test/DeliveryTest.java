@@ -31,28 +31,36 @@ public class DeliveryTest {
         user = DataGenerator.generateUser();
     }
 
-    @Test
-    void shouldRescheduleMeeting() {
-        // 1. Заполнение формы первой датой
-        $("[data-test-id='city'] input").setValue(user.getCity());
-        $("[data-test-id='date'] input").doubleClick().sendKeys(firstDate);
-        $("[data-test-id='name'] input").setValue(user.getName());
-        $("[data-test-id='phone'] input").setValue(user.getPhone());
-        $("[data-test-id='agreement'] .checkbox__text").click();
-        $$("button").findBy(Condition.text("Запланировать")).click();
+   @Test
+void shouldRescheduleMeeting() {
+    // 1. Заполнение формы первой датой
+    $("[data-test-id='city'] input").setValue(user.getCity());
+    $("[data-test-id='date'] input").doubleClick().sendKeys(firstDate);
+    $("[data-test-id='name'] input").setValue(user.getName());
+    $("[data-test-id='phone'] input").setValue(user.getPhone());
+    $("[data-test-id='agreement'] .checkbox__text").click();
+    $$("button").findBy(Condition.text("Запланировать")).click();
 
-        // 2. Проверка успешного планирования
-        $("[data-test-id='success-notification']").shouldBe(Condition.visible);
-        $("[data-test-id='success-notification'] .notification__content")
-                .shouldHave(Condition.text("Встреча успешно запланирована на " + firstDate));
+    // 2. Проверка успешного планирования
+    $("[data-test-id='success-notification']").shouldBe(Condition.visible);
+    $("[data-test-id='success-notification'] .notification__content")
+            .shouldHave(Condition.text("Встреча успешно запланирована на " + firstDate));
 
-        // 3. Изменение даты и повторная отправка
-        $("[data-test-id='date'] input").doubleClick().sendKeys(secondDate);
-        $$("button").findBy(Condition.text("Запланировать")).click();
+    // 3. Изменение даты и повторная отправка
+    $("[data-test-id='date'] input").doubleClick().sendKeys(secondDate);
+    $$("button").findBy(Condition.text("Запланировать")).click();
 
-        // 4. Проверка, что дата обновилась (приложение сразу перепланировало)
-        $("[data-test-id='success-notification']").shouldBe(Condition.visible);
-        $("[data-test-id='success-notification'] .notification__content")
-                .shouldHave(Condition.text("Встреча успешно запланирована на " + secondDate));
+    // 4. Проверка диалога перепланирования
+    $("[data-test-id='replan-notification']").shouldBe(Condition.visible);
+    $("[data-test-id='replan-notification'] .notification__content")
+            .shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"));
+
+    // 5. Нажатие кнопки "Перепланировать"
+    $$("button").findBy(Condition.text("Перепланировать")).click();
+
+    // 6. Проверка успешного перепланирования
+    $("[data-test-id='success-notification']").shouldBe(Condition.visible);
+    $("[data-test-id='success-notification'] .notification__content")
+            .shouldHave(Condition.text("Встреча успешно запланирована на " + secondDate));
     }
 }
