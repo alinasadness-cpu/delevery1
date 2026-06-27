@@ -17,10 +17,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     
-    - name: Install Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y chromium-browser chromium-chromedriver
+    - name: Setup Chrome
+      uses: browser-actions/setup-chrome@v1
+    
+    - name: Setup ChromeDriver
+      uses: nanasess/setup-chromedriver@v2
     
     - name: Make gradlew executable
       run: chmod +x gradlew
@@ -28,7 +29,11 @@ jobs:
     - name: Start application
       run: |
         java -jar artifacts/app-replan-delivery.jar &
-        sleep 10
+        sleep 15
     
     - name: Run tests
-      run: ./gradlew test -Dselenide.headless=true
+      run: |
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub &
+        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
+        ./gradlew test -Dselenide.headless=true
