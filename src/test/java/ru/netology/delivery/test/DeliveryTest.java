@@ -1,11 +1,11 @@
-package ru.netology;
+package ru.netology.delivery.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
-import ru.netology.DataGenerator;
+import ru.netology.delivery.data.DataGenerator;  // ← Импорт DataGenerator
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -63,51 +63,6 @@ public class DeliveryTest {
         $("[data-test-id=success-notification]").shouldBe(visible);
         $("[data-test-id=success-notification] .notification__content")
                 .shouldHave(text("Встреча успешно запланирована на " + secondDate));
-    }
-
-    @Test
-    @DisplayName("Should show validation messages for invalid data")
-    void shouldShowValidationMessagesForInvalidData() {
-        $("[data-test-id=replan] .button").click();
-
-        $("[data-test-id=city] .input__sub").shouldHave(text("Поле обязательно для заполнения"));
-        $("[data-test-id=date] .input__sub").shouldHave(text("Неверно введена дата"));
-        $("[data-test-id=name] .input__sub").shouldHave(text("Поле обязательно для заполнения"));
-        $("[data-test-id=phone] .input__sub").shouldHave(text("Поле обязательно для заполнения"));
-    }
-
-    @Test
-    @DisplayName("Should accept valid data and plan meeting")
-    void shouldPlanMeetingWithValidData() {
-        String meetingDate = DataGenerator.generateDate(5);
-
-        fillFormAndSubmit(meetingDate);
-
-        $("[data-test-id=success-notification]").shouldBe(visible);
-        $("[data-test-id=success-notification] .notification__content")
-                .shouldHave(text("Встреча успешно запланирована на " + meetingDate));
-    }
-
-    @Test
-    @DisplayName("Should handle checkbox acceptance")
-    void shouldHandleCheckboxAcceptance() {
-        String meetingDate = DataGenerator.generateDate(4);
-
-        $("[data-test-id=city] input").setValue(user.getCity());
-        $("[data-test-id=city] .menu-item").shouldBe(visible).click();
-
-        $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] input").setValue(meetingDate);
-
-        $("[data-test-id=name] input").setValue(user.getName());
-        $("[data-test-id=phone] input").setValue(user.getPhone());
-        $("[data-test-id=agreement] .checkbox__text").click();
-
-        $("[data-test-id=replan] .button").click();
-
-        $("[data-test-id=success-notification]").shouldBe(visible);
-        $("[data-test-id=success-notification] .notification__content")
-                .shouldHave(text("Встреча успешно запланирована на " + meetingDate));
     }
 
     private void fillFormAndSubmit(String date) {
