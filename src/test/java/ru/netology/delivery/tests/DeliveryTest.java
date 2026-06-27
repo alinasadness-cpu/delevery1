@@ -1,11 +1,11 @@
-package ru.netology.delivery.test;
+package ru.netology.delivery.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
-import ru.netology.delivery.data.DataGenerator;  // ← Импорт DataGenerator
+import ru.netology.delivery.data.DataGenerator;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
