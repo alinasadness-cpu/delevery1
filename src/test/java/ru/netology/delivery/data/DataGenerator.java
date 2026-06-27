@@ -1,7 +1,6 @@
 package ru.netology.delivery.data;
 
 import com.github.javafaker.Faker;
-import lombok.Value;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,49 +8,36 @@ import java.util.Locale;
 import java.util.Random;
 
 public class DataGenerator {
+    private static final Faker faker = new Faker(new Locale("ru"));
+    private static final Random random = new Random();
+
     private DataGenerator() {
     }
 
-    public static String generateDate(int shift) {
-        LocalDate date = LocalDate.now().plusDays(shift);
-        return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    public static String generateDate(int plusDays) {
+        return LocalDate.now().plusDays(plusDays).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     public static String generateCity() {
-        String[] cities = {"Москва", "Санкт-Петербург", "Казань", "Новосибирск",
-                "Екатеринбург", "Нижний Новгород", "Челябинск", "Самара"};
-        Random random = new Random();
+        String[] cities = {"Москва", "Санкт-Петербург", "Казань", "Новосибирск", "Екатеринбург"};
         return cities[random.nextInt(cities.length)];
     }
 
-    public static String generateName(Faker faker) {
-        return faker.name().fullName();
+    public static String generateName() {
+        return faker.name().firstName() + " " + faker.name().lastName();
     }
 
-    public static String generatePhone(Faker faker) {
-        return "+7" + faker.phoneNumber().subscriberNumber(10);
+    public static String generatePhone() {
+        return "+7" + faker.number().numberBetween(900, 999) + faker.number().numberBetween(1000000, 9999999);
     }
 
-    public static class Registration {
-        private static Faker faker;
-
-        private Registration() {
-        }
-
-        public static UserInfo generateUser(String locale) {
-            faker = new Faker(new Locale(locale));
-            return new UserInfo(
-                    generateCity(),
-                    generateName(faker),
-                    generatePhone(faker)
-            );
-        }
-    }
-
-    @Value
-    public static class UserInfo {
-        String city;
-        String name;
-        String phone;
+    // ДОБАВЬТЕ ЭТОТ МЕТОД:
+    public static UserInfo generateUser() {
+        return new UserInfo(
+                generateCity(),
+                generateDate(3),
+                generateName(),
+                generatePhone()
+        );
     }
 }
