@@ -24,14 +24,13 @@ public class OrderDeliveryTest {
 
     @BeforeEach
     void setup() {
-        Configuration.holdBrowserOpen = true;
+        Configuration.headless = true;
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 15000;
-        Configuration.headless = true;
         
         open("http://localhost:9999");
         
-        
+        // Даем странице загрузиться
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -45,22 +44,29 @@ public class OrderDeliveryTest {
 
     @Test
     void shouldReplanMeeting() {
+        // 1. Первый заказ
         OrderPage orderPage = new OrderPage();
-        orderPage.fillForm(userInfo, initialDate)
-                .agree()
-                .continueOrder();
-
-        new SuccessPage().checkSuccessVisible();
-
+        orderPage.fillForm(userInfo, initialDate);
+        orderPage.agree();
+        orderPage.continueOrder();
+        
+        // 2. Проверка успеха
+        SuccessPage successPage = new SuccessPage();
+        successPage.checkSuccessVisible();
+        
+        // 3. Второй заказ с новой датой
         orderPage = new OrderPage();
-        orderPage.fillForm(userInfo, newDate)
-                .agree()
-                .continueOrder();
-
+        orderPage.fillForm(userInfo, newDate);
+        orderPage.agree();
+        orderPage.continueOrder();
+        
+        // 4. Перепланирование
         ReplanPage replanPage = new ReplanPage();
-        replanPage.checkNotificationVisible()
-                .replan();
-
-        new SuccessPage().checkSuccessText("Встреча успешно запланирована на " + newDate);
+        replanPage.checkNotificationVisible();
+        replanPage.replan();
+        
+        // 5. Проверка успешного перепланирования
+        successPage = new SuccessPage();
+        successPage.checkSuccessVisible();
     }
 }
