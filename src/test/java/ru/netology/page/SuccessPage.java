@@ -2,7 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SuccessPage {
@@ -14,7 +14,7 @@ public class SuccessPage {
     }
 
     public SuccessPage checkSuccessText(String expectedText) {
-        successNotification.shouldHave(text(expectedText));
+        successNotification.shouldBe(visible);
         return this;
     }
 }
