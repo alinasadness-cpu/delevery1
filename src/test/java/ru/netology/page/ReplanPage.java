@@ -9,13 +9,11 @@ public class ReplanPage {
     private final SelenideElement notification = $("[data-test-id='replan-notification']");
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
-    public ReplanPage checkNotificationVisible() {
+    public void checkNotificationVisible() {
         notification.shouldBe(visible);
-        return this;
     }
 
-    public SuccessPage replan() {
+    public void replan() {
         replanButton.shouldBe(visible).click();
-        return new SuccessPage();
     }
 }
