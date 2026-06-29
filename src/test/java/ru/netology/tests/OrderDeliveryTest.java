@@ -19,6 +19,7 @@ public class OrderDeliveryTest {
 
     @BeforeAll
     static void setUpAll() {
+        // Автоматическая установка ChromeDriver подходящей версии
         WebDriverManager.chromedriver().setup();
     }
 
@@ -34,6 +35,7 @@ public class OrderDeliveryTest {
 
     @Test
     void shouldReplanMeeting() {
+        // Первый заказ
         OrderPage orderPage = new OrderPage();
         orderPage.fillForm(userInfo, initialDate)
                 .agree()
@@ -41,11 +43,13 @@ public class OrderDeliveryTest {
 
         new SuccessPage().checkSuccessVisible();
 
+        // Второй заказ с новой датой
         orderPage = new OrderPage();
         orderPage.fillForm(userInfo, newDate)
                 .agree()
                 .continueOrder();
 
+        // Перепланирование
         ReplanPage replanPage = new ReplanPage();
         replanPage.checkNotificationVisible()
                 .replan();
