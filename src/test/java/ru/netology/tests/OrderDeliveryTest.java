@@ -1,6 +1,8 @@
 package ru.netology.tests;
 
 import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
@@ -15,6 +17,11 @@ public class OrderDeliveryTest {
     private String initialDate;
     private String newDate;
 
+    @BeforeAll
+    static void setUpAll() {
+        WebDriverManager.chromedriver().setup();
+    }
+
     @BeforeEach
     void setup() {
         Configuration.holdBrowserOpen = true;
@@ -27,7 +34,6 @@ public class OrderDeliveryTest {
 
     @Test
     void shouldReplanMeeting() {
-        // Первый заказ
         OrderPage orderPage = new OrderPage();
         orderPage.fillForm(userInfo, initialDate)
                 .agree()
@@ -35,13 +41,11 @@ public class OrderDeliveryTest {
 
         new SuccessPage().checkSuccessVisible();
 
-        // Второй заказ с новой датой
         orderPage = new OrderPage();
         orderPage.fillForm(userInfo, newDate)
                 .agree()
                 .continueOrder();
 
-        // Перепланирование
         ReplanPage replanPage = new ReplanPage();
         replanPage.checkNotificationVisible()
                 .replan();
