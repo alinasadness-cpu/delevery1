@@ -22,7 +22,6 @@ public class DataHelper {
     }
 
     public static String generateDate(int daysToAdd) {
-        // Формат ДЕНЬ.МЕСЯЦ.ГОД (как в вашем HTML: 03.07.2026)
         return LocalDate.now().plusDays(daysToAdd)
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
