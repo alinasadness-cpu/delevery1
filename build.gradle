@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'io.qameta.allure' version '2.11.2'
 }
 
 group = 'ru.netology'
@@ -10,15 +9,11 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.21.0"
-
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
-    testImplementation 'com.codeborne:selenide:6.12.4'
+    testImplementation 'com.codeborne:selenide:6.12.3'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
-    testImplementation 'io.qameta.allure:allure-selenide:2.21.0'
-    compileOnly 'org.projectlombok:lombok:1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testImplementation 'org.projectlombok:lombok:1.18.26'
     testCompileOnly 'org.projectlombok:lombok:1.18.26'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
 }
