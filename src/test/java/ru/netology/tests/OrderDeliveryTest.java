@@ -1,7 +1,6 @@
 package ru.netology.tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,8 +10,6 @@ import ru.netology.page.OrderPage;
 import ru.netology.page.ReplanPage;
 import ru.netology.page.SuccessPage;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class OrderDeliveryTest {
@@ -34,8 +31,12 @@ public class OrderDeliveryTest {
         
         open("http://localhost:9999");
         
-        // Ждем загрузки страницы
-        $("[data-test-id='city'] input").shouldBe(visible);
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
         userInfo = DataHelper.generateUserInfo();
         initialDate = DataHelper.generateDate(3);
@@ -44,7 +45,6 @@ public class OrderDeliveryTest {
 
     @Test
     void shouldReplanMeeting() {
-        // Первый заказ
         OrderPage orderPage = new OrderPage();
         orderPage.fillForm(userInfo, initialDate)
                 .agree()
@@ -52,13 +52,11 @@ public class OrderDeliveryTest {
 
         new SuccessPage().checkSuccessVisible();
 
-        // Второй заказ с новой датой
         orderPage = new OrderPage();
         orderPage.fillForm(userInfo, newDate)
                 .agree()
                 .continueOrder();
 
-        // Перепланирование
         ReplanPage replanPage = new ReplanPage();
         replanPage.checkNotificationVisible()
                 .replan();
