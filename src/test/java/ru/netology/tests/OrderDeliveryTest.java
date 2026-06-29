@@ -1,6 +1,7 @@
 package ru.netology.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,8 @@ import ru.netology.page.OrderPage;
 import ru.netology.page.ReplanPage;
 import ru.netology.page.SuccessPage;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class OrderDeliveryTest {
@@ -19,7 +22,6 @@ public class OrderDeliveryTest {
 
     @BeforeAll
     static void setUpAll() {
-        // Автоматическая установка ChromeDriver подходящей версии
         WebDriverManager.chromedriver().setup();
     }
 
@@ -27,7 +29,14 @@ public class OrderDeliveryTest {
     void setup() {
         Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "1920x1080";
+        Configuration.timeout = 15000;
+        Configuration.headless = true;
+        
         open("http://localhost:9999");
+        
+        // Ждем загрузки страницы
+        $("[data-test-id='city'] input").shouldBe(visible);
+        
         userInfo = DataHelper.generateUserInfo();
         initialDate = DataHelper.generateDate(3);
         newDate = DataHelper.generateDate(7);
