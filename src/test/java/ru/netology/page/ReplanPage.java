@@ -2,7 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ReplanPage {
@@ -15,7 +15,7 @@ public class ReplanPage {
     }
 
     public SuccessPage replan() {
-        replanButton.click();
+        replanButton.shouldBe(visible).click();
         return new SuccessPage();
     }
 }
