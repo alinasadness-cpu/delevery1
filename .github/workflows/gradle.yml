@@ -22,15 +22,29 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: 'stable'
-
       - name: Start app
         run: |
           java -jar artifacts/app-replan-delivery.jar &
           sleep 10
 
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: '114'
+
+      - name: Setup ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          echo "Chrome version: $CHROME_VERSION"
+          
+          # Устанавливаем ChromeDriver совместимой версии
+          wget -q https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/114.0.5735.90/linux64/chromedriver-linux64.zip
+          unzip -q chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+          sudo chmod +x /usr/local/bin/chromedriver
+          chromedriver --version
+
       - name: Run tests
-        run: ./gradlew test
+        run: |
+          export PATH=$PATH:/usr/local/bin
+          ./gradlew test
