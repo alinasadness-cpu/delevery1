@@ -22,9 +22,9 @@ public class DataHelper {
     }
 
     public static String generateDate(int daysToAdd) {
-        // Формат для поля date: YYYY-MM-DD
+        // Формат ДЕНЬ.МЕСЯЦ.ГОД (как в вашем HTML: 03.07.2026)
         return LocalDate.now().plusDays(daysToAdd)
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     public static String generateCity() {
