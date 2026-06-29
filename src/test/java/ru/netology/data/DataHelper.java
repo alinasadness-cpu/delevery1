@@ -22,13 +22,13 @@ public class DataHelper {
     }
 
     public static String generateDate(int daysToAdd) {
+        // Формат для поля date: YYYY-MM-DD
         return LocalDate.now().plusDays(daysToAdd)
-                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public static String generateCity() {
-        String[] cities = {"Москва", "Санкт-Петербург", "Казань",
-                "Нижний Новгород", "Екатеринбург", "Новосибирск"};
+        String[] cities = {"Москва", "Санкт-Петербург", "Казань", "Нижний Новгород", "Екатеринбург", "Новосибирск"};
         return cities[random.nextInt(cities.length)];
     }
 
