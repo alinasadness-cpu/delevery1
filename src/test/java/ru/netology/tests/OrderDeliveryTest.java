@@ -14,7 +14,7 @@ public class OrderDeliveryTest {
 
     @BeforeEach
     void setup() {
-        open("http://localhost:9999");
+        open("http://localhost:9999");   
         userInfo = DataHelper.generateUserInfo();
         initialDate = DataHelper.generateDate(3);
         newDate = DataHelper.generateDate(7);
@@ -29,12 +29,10 @@ public class OrderDeliveryTest {
         orderPage.continueOrder();
         orderPage.checkSuccessNotification("Встреча успешно запланирована на " + initialDate);
 
-      
         orderPage.fillForm(userInfo, newDate);
         orderPage.agree();
         orderPage.continueOrder();
 
-      
         orderPage.checkReplanNotification("У вас уже запланирована встреча на другую дату. Перепланировать?");
         orderPage.replan();
 
