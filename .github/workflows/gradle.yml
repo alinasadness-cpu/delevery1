@@ -25,7 +25,6 @@ jobs:
       - name: Start app
         run: |
           java -jar artifacts/app-replan-delivery.jar &
-          sleep 15
 
       - name: Run tests
-        run: ./gradlew test -Dselenide.headless=true
+        run: ./gradlew test -Dselenide.headless=true --info  
