@@ -1,14 +1,9 @@
 package ru.netology.tests;
 
-import com.codeborne.selenide.Configuration;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.page.OrderPage;
-import ru.netology.page.ReplanPage;
-import ru.netology.page.SuccessPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -17,21 +12,9 @@ public class OrderDeliveryTest {
     private String initialDate;
     private String newDate;
 
-    @BeforeAll
-    static void setUpAll() {
-        WebDriverManager.chromedriver().setup();
-    }
-
     @BeforeEach
-    void setup() { 
+    void setup() {
         open("http://localhost:9999");
-        
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        
         userInfo = DataHelper.generateUserInfo();
         initialDate = DataHelper.generateDate(3);
         newDate = DataHelper.generateDate(7);
@@ -40,23 +23,21 @@ public class OrderDeliveryTest {
     @Test
     void shouldReplanMeeting() {
         OrderPage orderPage = new OrderPage();
+
         orderPage.fillForm(userInfo, initialDate);
         orderPage.agree();
         orderPage.continueOrder();
+        orderPage.checkSuccessNotification("Встреча успешно запланирована на " + initialDate);
 
-        SuccessPage successPage = new SuccessPage();
-        successPage.checkSuccessVisible();
-
-        orderPage = new OrderPage();
+      
         orderPage.fillForm(userInfo, newDate);
         orderPage.agree();
         orderPage.continueOrder();
 
-        ReplanPage replanPage = new ReplanPage();
-        replanPage.checkNotificationVisible();
-        replanPage.replan();
+      
+        orderPage.checkReplanNotification("У вас уже запланирована встреча на другую дату. Перепланировать?");
+        orderPage.replan();
 
-        successPage = new SuccessPage();
-        successPage.checkSuccessVisible();
+        orderPage.checkSuccessNotification("Встреча успешно запланирована на " + newDate);
     }
 }
