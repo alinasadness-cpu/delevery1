@@ -23,11 +23,7 @@ public class OrderDeliveryTest {
     }
 
     @BeforeEach
-    void setup() {
-        Configuration.headless = true;
-        Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 15000;
-        
+    void setup() { 
         open("http://localhost:9999");
         
         try {
