@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class OrderPage {
+
     private final SelenideElement cityField = $("[data-test-id='city'] input");
     private final SelenideElement dateField = $("[data-test-id='date'] input");
     private final SelenideElement nameField = $("[data-test-id='name'] input");
@@ -15,9 +16,9 @@ public class OrderPage {
     private final SelenideElement agreementCheckbox = $("[data-test-id='agreement'] .checkbox__box");
     private final SelenideElement planButton = $(".button__text");
 
-  
+
     private final SelenideElement successNotification = $("[data-test-id='success-notification'] .notification__content");
-    private final SelenideElement replanNotification = $("[data-test-id='replan-notification'] .notification__content");
+    private final SelenideElement replanNotification = $("[data-test-id='replan-notification']");
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
