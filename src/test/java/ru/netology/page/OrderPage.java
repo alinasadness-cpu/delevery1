@@ -16,14 +16,21 @@ public class OrderPage {
     private final SelenideElement agreementCheckbox = $("[data-test-id='agreement'] .checkbox__box");
     private final SelenideElement planButton = $(".button__text");
 
-    private final SelenideElement successNotification = $("[data-test-id='success-notification'] .notification__content");
-    private final SelenideElement replanNotification = $("[data-test-id='replan-notification'] .notification__content");
+    private final SelenideElement successNotification = $("[data-test-id='success-notification'] .notification_content");
+    private final SelenideElement replanNotification = $("[data-test-id='replan-notification'] .notification_content");
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
+        cityField.clear();
         cityField.setValue(userInfo.getCity());
+        
+        dateField.clear();
         dateField.setValue(date);
+        
+        nameField.clear();
         nameField.setValue(userInfo.getName());
+        
+        phoneField.clear();
         phoneField.setValue(userInfo.getPhone());
     }
 
