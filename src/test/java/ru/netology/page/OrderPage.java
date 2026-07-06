@@ -1,6 +1,7 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Keys;
 import ru.netology.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.text;
@@ -21,16 +22,20 @@ public class OrderPage {
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
-        cityField.clear();
+        cityField.doubleClick();
+        cityField.sendKeys(Keys.BACK_SPACE);
         cityField.setValue(userInfo.getCity());
         
-        dateField.clear();
+        dateField.doubleClick();
+        dateField.sendKeys(Keys.BACK_SPACE);
         dateField.setValue(date);
         
-        nameField.clear();
+        nameField.doubleClick();
+        nameField.sendKeys(Keys.BACK_SPACE);
         nameField.setValue(userInfo.getName());
         
-        phoneField.clear();
+        phoneField.doubleClick();
+        phoneField.sendKeys(Keys.BACK_SPACE);
         phoneField.setValue(userInfo.getPhone());
     }
 
