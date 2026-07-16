@@ -30,7 +30,6 @@ public class OrderDeliveryTest {
         orderPage.checkSuccessNotification("Встреча успешно запланирована на " + initialDate);
 
         orderPage.fillForm(userInfo, newDate);
-        orderPage.agree();
         orderPage.continueOrder();
 
         orderPage.checkReplanNotification("У вас уже запланирована встреча на другую дату. Перепланировать?");
