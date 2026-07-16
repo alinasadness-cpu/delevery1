@@ -22,20 +22,20 @@ public class OrderPage {
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
-        cityField.doubleClick();
-        cityField.sendKeys(Keys.BACK_SPACE);
+        cityField.click();
+        cityField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         cityField.setValue(userInfo.getCity());
 
-        dateField.doubleClick();
-        dateField.sendKeys(Keys.BACK_SPACE);
+        dateField.click();
+        dateField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         dateField.setValue(date);
 
-        nameField.doubleClick();
-        nameField.sendKeys(Keys.BACK_SPACE);
+        nameField.click();
+        nameField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         nameField.setValue(userInfo.getName());
 
-        phoneField.doubleClick();
-        phoneField.sendKeys(Keys.BACK_SPACE);
+        phoneField.click();
+        phoneField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         phoneField.setValue(userInfo.getPhone());
     }
 
