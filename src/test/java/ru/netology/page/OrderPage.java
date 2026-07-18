@@ -23,19 +23,15 @@ public class OrderPage {
 
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
        
-        cityField.click();
         cityField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         cityField.setValue(userInfo.getCity());
 
-        dateField.click();
         dateField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         dateField.setValue(date);
 
-        nameField.click();
         nameField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         nameField.setValue(userInfo.getName());
 
-        phoneField.click();
         phoneField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         phoneField.setValue(userInfo.getPhone());
     }
