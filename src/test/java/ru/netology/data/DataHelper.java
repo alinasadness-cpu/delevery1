@@ -42,8 +42,6 @@ public class DataHelper {
     public static UserInfo generateUserInfo() {
         return new UserInfo(generateCity(), generateName(), generatePhone());
     }
-<<<<<<< HEAD
 }
-=======
 }
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
+
