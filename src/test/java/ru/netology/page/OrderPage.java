@@ -22,11 +22,8 @@ public class OrderPage {
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
-<<<<<<< HEAD
 
-=======
        
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
         cityField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         cityField.setValue(userInfo.getCity());
 
@@ -61,8 +58,5 @@ public class OrderPage {
         replanNotification.shouldBe(visible)
                 .shouldHave(text(expectedText));
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
+
