@@ -26,6 +26,7 @@ test {
     useJUnitPlatform()
 }
 
+
 allure {
     autoconfigure = true
     version = '2.24.0'
