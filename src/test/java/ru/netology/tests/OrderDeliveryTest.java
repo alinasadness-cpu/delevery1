@@ -1,5 +1,6 @@
 package ru.netology.tests;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
@@ -19,6 +20,12 @@ public class OrderDeliveryTest {
 
     @BeforeAll
     static void setUpAll() {
+
+        Configuration.browser = "firefox";
+        Configuration.headless = false;
+        Configuration.browserSize = "1920x1080";
+        Configuration.timeout = 15000;
+
         SelenideLogger.addListener("allure", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false)
@@ -47,11 +54,11 @@ public class OrderDeliveryTest {
         orderPage.continueOrder();
 
         orderPage.checkSuccessNotification("Встреча успешно запланирована на " + initialDate);
+
         orderPage.fillForm(userInfo, newDate);
         orderPage.continueOrder();
 
         orderPage.checkReplanNotification("У вас уже запланирована встреча на другую дату. Перепланировать?");
-
         orderPage.replan();
 
         orderPage.checkSuccessNotification("Встреча успешно запланирована на " + newDate);

@@ -1,6 +1,7 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import ru.netology.data.DataHelper;
 
@@ -21,12 +22,8 @@ public class OrderPage {
     private final SelenideElement replanNotification = $("[data-test-id='replan-notification'] .notification__content");
     private final SelenideElement replanButton = $("[data-test-id='replan-notification'] button");
 
+    @Step("Заполнить форму данными: {userInfo}, дата: {date}")
     public void fillForm(DataHelper.UserInfo userInfo, String date) {
-<<<<<<< HEAD
-
-=======
-       
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
         cityField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         cityField.setValue(userInfo.getCity());
 
@@ -40,29 +37,32 @@ public class OrderPage {
         phoneField.setValue(userInfo.getPhone());
     }
 
+    @Step("Согласиться с условиями")
     public void agree() {
         agreementCheckbox.click();
     }
 
+    @Step("Нажать кнопку 'Запланировать'")
     public void continueOrder() {
         planButton.click();
     }
 
+    @Step("Нажать кнопку 'Перепланировать'")
     public void replan() {
         replanButton.click();
     }
 
+    @Step("Проверить уведомление об успехе: {expectedText}")
     public void checkSuccessNotification(String expectedText) {
         successNotification.shouldBe(visible)
                 .shouldHave(text(expectedText));
     }
 
+    @Step("Проверить уведомление о перепланировании: {expectedText}")
     public void checkReplanNotification(String expectedText) {
         replanNotification.shouldBe(visible)
                 .shouldHave(text(expectedText));
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
+
+

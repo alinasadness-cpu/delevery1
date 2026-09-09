@@ -1,8 +1,15 @@
-<<<<<<< HEAD
-## Найденные дефекты
-- [Issue #1: Не работает перепланирование даты](https://github.com/alinasadness-cpu/delivery-allure-tests/issues/1)
-=======
-# Автотесты для сервиса доставки карты
+## Результаты тестирования
+
+Allure-отчёт успешно сгенерирован. Тест упал, но интеграция Allure работает корректно.
+
+### Общий вид Allure-отчёта
+![img.png](img.png)
+
+### Вкладка Categories (классификация дефектов)
+![img_1.png](img_1.png)
+
+### Статус теста
+![img_2.png](img_2.png)
 
 [![Java CI](https://github.com/alinasadness-cpu/delevery1/actions/workflows/gradle.yml/badge.svg)](https://github.com/alinasadness-cpu/delevery1/actions/workflows/gradle.yml)
 ## Описание проекта
@@ -21,4 +28,4 @@
 1. Запустите приложение:
    ```bash
    java -jar artifacts/app-replan-delivery.jar
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
+

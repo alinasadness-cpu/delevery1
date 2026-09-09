@@ -1,18 +1,11 @@
 plugins {
     id 'java'
-<<<<<<< HEAD
     id 'application'
     id 'io.qameta.allure' version '2.11.2'
 }
 
 group 'ru.netology'
 version '1.0-SNAPSHOT'
-=======
-}
-
-group = 'ru.netology'
-version = '1.0-SNAPSHOT'
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
 
 repositories {
     mavenCentral()
@@ -20,28 +13,19 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
-<<<<<<< HEAD
     testImplementation 'com.codeborne:selenide:6.12.3'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'org.projectlombok:lombok:1.18.26'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
 
+    // Allure
     testImplementation 'io.qameta.allure:allure-selenide:2.24.0'
     testImplementation 'io.qameta.allure:allure-junit5:2.24.0'
-=======
-    testImplementation 'com.codeborne:selenide:6.19.1'
-    testImplementation 'com.github.javafaker:javafaker:1.0.2'
-    testImplementation 'org.projectlombok:lombok:1.18.26'
-    testCompileOnly 'org.projectlombok:lombok:1.18.26'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
 }
 
 test {
     useJUnitPlatform()
-<<<<<<< HEAD
 }
-
 
 allure {
     autoconfigure = true
@@ -50,7 +34,3 @@ allure {
         version = '2.24.0'
     }
 }
-=======
-    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-}
->>>>>>> 6f11ec501c2bb55eed08ae5a6cd491138820a774
