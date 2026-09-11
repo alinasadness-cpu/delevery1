@@ -20,11 +20,7 @@ public class OrderDeliveryTest {
 
     @BeforeAll
     static void setUpAll() {
-
         Configuration.browser = "firefox";
-        Configuration.headless = false;
-        Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 15000;
 
         SelenideLogger.addListener("allure", new AllureSelenide()
                 .screenshots(true)
